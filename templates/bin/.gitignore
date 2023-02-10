@@ -1,6 +1,5 @@
 # Prerequisites
 .build
-.test
 *.d
 
 # Object files
@@ -37,7 +36,6 @@
 *.i*86
 *.x86_64
 *.hex
-cpack
 
 # Debug files
 *.dSYM/
@@ -46,9 +44,6 @@ cpack
 *.pdb
 *.gcda
 *.gcno
-RESULT_VALGRIND.txt
-report
-report.info
 
 # Kernel Module Compile Results
 *.mod*
