@@ -1,5 +1,5 @@
-#ifndef CPAC_INCLUDE_CPAC_H_
-#define CPAC_INCLUDE_CPAC_H_
+#ifndef CPACK_INCLUDE_CPACK_H_
+#define CPACK_INCLUDE_CPACK_H_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,29 +8,42 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "help.h"
+#include "cpack/error.h"
+#include "cpack/help.h"
 
-#define OK 0
-#define ERR 1
+#define TRUE 1
+#define FALSE 0
+
+typedef int bool_t;
 
 typedef enum help_page {
   Main,
   New,
 } hpage_t;
 
+typedef struct flags {
+  char proj_type[16];
+} flags_t;
+
+typedef struct app_state {
+  int argc;
+  char **argv;
+  flags_t flags;
+} state_t;
+
 /* ------------------------------------------------ */
 /*    MAIN FUNCTIONS                                */
 /* ------------------------------------------------ */
 
-int cpack_exec(int argc, char *argv[]);
+int cpack_exec(state_t *state);
 
 /* ------------------------------------------------ */
 /*    SUBCOMMANDS                                   */
 /* ------------------------------------------------ */
 
-void subcmd_init();
+void subcmd_init(flags_t *);
 
-void subcmd_new(const char *);
+void subcmd_new(const char *, flags_t *);
 
 /* ------------------------------------------------ */
 /*    UTILITY FUNCTIONS                             */
@@ -40,8 +53,12 @@ void print_help(hpage_t);
 
 int check_no_args(int);
 
+int parse_flags(state_t *state);
+
 #ifdef DEBUG
 void dbg_args(int argc, char *argv[]);
+
+void dbg_flags(flags_t *flags);
 #endif
 
-#endif  // CPAC_INCLUDE_CPAC_H_
+#endif  // CPACK_INCLUDE_CPACK_H_

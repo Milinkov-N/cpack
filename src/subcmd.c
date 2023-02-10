@@ -1,13 +1,14 @@
 #include "cpack.h"
 
-static void create_project(const char *projname) {
-  char cmd[128] = {0}, git[96] = {0};
+static void create_project(const char *projname, flags_t *flags) {
+  char cmd[128] = {0}, git[96] = {0}, *template = flags->proj_type;
 
   if (projname != NULL) {
-    sprintf(cmd, "cp -R $HOME/.cpack/templates/bin $PWD/%.64s", projname);
+    sprintf(cmd, "cp -R $HOME/.cpack/templates/%.3s $PWD/%.64s", template,
+            projname);
     sprintf(git, "git init $PWD/%.64s", projname);
   } else {
-    sprintf(cmd, "cp -R $HOME/.cpack/templates/bin/* $PWD");
+    sprintf(cmd, "cp -R $HOME/.cpack/templates/%.3s/* $PWD", template);
     sprintf(git, "git init $PWD");
   }
 
@@ -21,13 +22,13 @@ static void create_project(const char *projname) {
   }
 }
 
-void subcmd_init() { create_project(NULL); }
+void subcmd_init(flags_t *flags) { create_project(NULL, flags); }
 
-void subcmd_new(const char *projname) {
+void subcmd_new(const char *projname, flags_t *flags) {
   if (projname == NULL) {
     print_help(New);
     return;
   }
 
-  create_project(projname);
+  create_project(projname, flags);
 }

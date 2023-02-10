@@ -11,10 +11,35 @@ void print_help(hpage_t page) {
   }
 }
 
-int check_no_args(int argc) {
+result_t check_no_args(int argc) {
   int res = ERR;
   argc < 2 ? print_help(Main) : (res = OK);
   return res;
+}
+
+result_t parse_flags(state_t *state) {
+  if (state == NULL) return ERR;
+
+  bool_t is_bin = FALSE, is_lib = FALSE;
+
+  for (int i = 0; i < state->argc; i++)
+    if (!strcmp(state->argv[i], "--lib")) {
+      sprintf(state->flags.proj_type, "lib");
+      is_lib = TRUE;
+    } else if (!strcmp(state->argv[i], "--bin")) {
+      sprintf(state->flags.proj_type, "bin");
+      is_bin = TRUE;
+    }
+
+  if (is_bin && is_lib) return ERR_PROJECT_TYPE;
+
+  if (!strlen(state->flags.proj_type)) sprintf(state->flags.proj_type, "bin");
+
+#ifdef DEBUG
+  dbg_flags(&state->flags);
+#endif
+
+  return OK;
 }
 
 #ifdef DEBUG
@@ -25,5 +50,12 @@ void dbg_args(int argc, char *argv[]) {
       printf("\"%s\", ", argv[i]);
     else
       printf("\"%s\"]\n}\n", argv[i]);
+}
+#endif
+
+#ifdef DEBUG
+void dbg_flags(flags_t *flags) {
+  if (flags == NULL) return;
+  printf("Flags {\n  proj_type: %s\n}\n", flags->proj_type);
 }
 #endif

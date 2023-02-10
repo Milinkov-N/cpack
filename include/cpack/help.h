@@ -1,5 +1,5 @@
-#ifndef CPAC_INCLUDE_HELP_H_
-#define CPAC_INCLUDE_HELP_H_
+#ifndef CPACK_INCLUDE_HELP_H_
+#define CPACK_INCLUDE_HELP_H_
 
 #define HELP_PAGE_MAIN                                                   \
   "cpack 0.1.0 (10-02-2023)\n"                                           \
@@ -18,4 +18,4 @@
   "USAGE:\n"                                         \
   "\tcpac new  <PROJECT_NAME>\n\n"
 
-#endif  // CPAC_INCLUDE_HELP_H_
+#endif  // CPACK_INCLUDE_HELP_H_
