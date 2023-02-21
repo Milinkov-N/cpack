@@ -14,6 +14,9 @@
 #define TRUE 1
 #define FALSE 0
 
+#define ENABLE 1
+#define DISABLE 0
+
 typedef int bool_t;
 
 typedef enum help_page {
@@ -23,6 +26,7 @@ typedef enum help_page {
 
 typedef struct flags {
   char proj_type[16];
+  char git;
 } flags_t;
 
 typedef struct app_state {

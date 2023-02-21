@@ -13,7 +13,7 @@ static void create_project(const char *projname, flags_t *flags) {
   }
 
   system(cmd);
-  system(git);
+  if (flags->git) system(git);
 
   if (projname != NULL) {
     printf("Created new project %s\n", projname);

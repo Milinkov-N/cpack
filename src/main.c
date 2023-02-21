@@ -7,7 +7,7 @@ int main(int argc, char *argv[]) {
   dbg_args(argc, argv);
 #endif
 
-  state_t state = {argc, argv, {{0}}};
+  state_t state = {argc, argv, {{0}, 0}};
 
   switch (parse_flags(&state)) {
     case ERR_PROJECT_TYPE:

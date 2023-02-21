@@ -6,16 +6,16 @@
   "The C Language Local Package Manager\n"                               \
   "Author: Milinkov Nikita (s21: taniakia) <milinkov.nik@gmail.com>\n\n" \
   "USAGE:\n"                                                             \
-  "\tcpac [FLAGS]  <SUBCOMMAND>\n\n"                                     \
+  "\tcpack <SUBCOMMAND> [FLAGS]\n\n"                                     \
   "SUBCOMMANDS:\n"                                                       \
   "\tinit      Initialize an empty project in current folder\n"          \
   "\tnew       Create a new empty project with a given name\n"           \
   "\thelp      Prints this message\n"
 
 #define HELP_PAGE_NEW                                \
-  "cpac-new\n"                                       \
+  "cpack-new\n"                                      \
   "Create a new empty project with a given name\n\n" \
   "USAGE:\n"                                         \
-  "\tcpac new  <PROJECT_NAME>\n\n"
+  "\tcpack new  <PROJECT_NAME>\n\n"
 
 #endif  // CPACK_INCLUDE_HELP_H_

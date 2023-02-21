@@ -29,6 +29,8 @@ result_t parse_flags(state_t *state) {
     } else if (!strcmp(state->argv[i], "--bin")) {
       sprintf(state->flags.proj_type, "bin");
       is_bin = TRUE;
+    } else if (!strcmp(state->argv[i], "--git")) {
+      state->flags.git = ENABLE;
     }
 
   if (is_bin && is_lib) return ERR_PROJECT_TYPE;
