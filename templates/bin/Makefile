@@ -14,16 +14,16 @@ ARGS       =
 all: run
 
 run: $(NAME)
-	./$(NAME) $(ARGS)
+	-./$(NAME) $(ARGS)
 
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(@D)
-	$(CC) $(CFLAGS) $(DEBUG) -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $@ $<
 
-rebuild: clean all
+rebuild: clean $(NAME)
 
 rerun: clean all
 

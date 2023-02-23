@@ -10,6 +10,7 @@
 
 #include "cpack/error.h"
 #include "cpack/help.h"
+#include "filegen.h"
 
 #define TRUE 1
 #define FALSE 0
