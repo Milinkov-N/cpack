@@ -1,4 +1,4 @@
-NAME      := filegen
+NAME      := fs
 TARGET    := lib$(NAME).a
 
 SRC_DIR   := src
@@ -12,7 +12,7 @@ CC        := gcc
 RM        := rm -rf
 AR        := ar
 CFLAGS    := -std=c11 -Wall -Wextra -Werror
-CPPFLAGS  := -MMD -MP -I include -I ../../include
+CPPFLAGS  := -MMD -MP -I include
 ARFLAGS   := -rcs
 
 all: $(NAME)
@@ -25,8 +25,6 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 	$(info CREATED $@)
-
--include $(DEP)
 
 rebuild: clean all
 

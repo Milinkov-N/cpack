@@ -10,7 +10,7 @@
 
 #include "cpack/error.h"
 #include "cpack/help.h"
-#include "filegen.h"
+#include "fs.h"
 
 #define TRUE 1
 #define FALSE 0
@@ -59,6 +59,17 @@ void print_help(hpage_t);
 int check_no_args(int);
 
 int parse_flags(state_t *state);
+
+result_t cpack_create_project(char *projname, char *template);
+
+result_t cpack_create_project_folder(const char *name);
+
+void cpack_add_tmp_folder_to_proj(const char *projname, const char *tmp_path,
+                                  const char *entry);
+
+char *cpack_strip_tmp_name(char *path, char *tmp_name);
+
+char *cpack_gen_filepath(char *projname, char *entry, char *tmp_name);
 
 #ifdef DEBUG
 void dbg_args(int argc, char *argv[]);

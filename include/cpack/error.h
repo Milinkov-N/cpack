@@ -4,6 +4,8 @@
 #define OK 0x0
 #define ERR 0x01
 #define ERR_PROJECT_TYPE 0x02
+#define ERR_CR_PROJ_FOLDER 0x04
+#define ERR_TEMP_NOT_FOUND 0x08
 
 #define ERRMSG_PROJECT_TYPE                                         \
   "Error: Only --lib or --bin flag can be given at the same time\n" \

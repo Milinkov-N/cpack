@@ -4,13 +4,13 @@ SRC_DIR     := src
 BUILD_DIR   := .build
 INST_DIR    := $(HOME)/.$(NAME)
 
-LIBS        := filegen
+LIBS        := fs
 LIBNAMES    := $(addprefix lib,$(LIBS))
-LIBS_TARGET := lib/filegen/filegen.a
+LIBS_TARGET := lib/fs/libfs.a
 LIBS_INC    := $(LIBS:%=lib/%/include)
 INCS        := include $(LIBS_INC)
 
-SRC         := $(addprefix $(SRC_DIR)/, main.c cpack.c subcmd.c utils.c)
+SRC         := $(addprefix $(SRC_DIR)/, cpack.c main.c)
 OBJ         := $(SRC:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 DEP         := $(OBJ:.o=.d)
 
@@ -29,6 +29,9 @@ all: run
 
 run: $(NAME)
 	-./$(NAME) $(ARGS)
+
+debug:
+	$(MAKE) rebuild DEBUG=yes
 
 $(NAME): $(LIBS_TARGET) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) $(LDLIBS) -o $(NAME)
