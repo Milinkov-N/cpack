@@ -2,30 +2,40 @@
 
 result_t cpack_create_project(char *projname, char *template) {
   char **entries;
-  if (projname == NULL || template == NULL) return ERR;
-  if (cpack_create_project_folder(projname)) return ERR_CR_PROJ_FOLDER;
-  if ((entries = fs_scandir(template)) == NULL) return ERR_TEMP_NOT_FOUND;
+  const char *tmp_root = getenv("CPACK_TMP_PATH");
+  char *tmp = calloc(strlen(tmp_root) + strlen(template) + 1, sizeof(char));
 
-  if (entries != NULL) {
-    char **p = entries;
+  if (projname == NULL || template == NULL || tmp == NULL) return ERR;
+  if (strcmp(projname, ".") && cpack_create_project_folder(projname)) {
+    free(tmp);
+    return ERR_CR_PROJ_FOLDER;
+  }
 
-    while (*p != NULL) {
-      int res = 0;
-      cpack_add_tmp_folder_to_proj(projname, template, *p);
-      char *content = fs_read(*p),
-           *filepath = cpack_gen_filepath(projname, *p, template);
+  sprintf(tmp, "%s/%s", tmp_root, template);
 
-      if (content != NULL && filepath != NULL && !res) {
-        fs_write(filepath, content);
-        free(filepath);
-        free(content);
-      }
+  if ((entries = fs_scandir(tmp)) == NULL) {
+    free(tmp);
+    return ERR_TEMP_NOT_FOUND;
+  }
 
-      free(*(p++));
+  char **p = entries;
+
+  while (*p != NULL) {
+    int res = 0;
+    cpack_add_tmp_folder_to_proj(projname, tmp, *p);
+    char *content = fs_read(*p),
+         *filepath = cpack_gen_filepath(projname, *p, tmp);
+
+    if (content != NULL && filepath != NULL && !res) {
+      fs_write(filepath, content);
+      free(filepath);
+      free(content);
     }
 
-    free(entries);
+    free(*(p++));
   }
+
+  free(entries);
 
   return OK;
 }

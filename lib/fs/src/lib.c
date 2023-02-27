@@ -7,7 +7,7 @@ char *fs_read(const char *filepath) {
   size_t fsize;
   char *bytes;
 
-  if (filepath == NULL || (fp = fopen(filepath, "rb")) == NULL) return 0;
+  if (filepath == NULL || (fp = fopen(filepath, "rb")) == NULL) return NULL;
 
   fsize = fs_fsize(fp);
   if ((bytes = calloc(fsize + 1, sizeof(char))) != NULL)

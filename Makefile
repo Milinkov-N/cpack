@@ -10,7 +10,7 @@ LIBS_TARGET := lib/fs/libfs.a
 LIBS_INC    := $(LIBS:%=lib/%/include)
 INCS        := include $(LIBS_INC)
 
-SRC         := $(addprefix $(SRC_DIR)/, cpack.c main.c)
+SRC         := $(addprefix $(SRC_DIR)/, cpack.c cli.c main.c)
 OBJ         := $(SRC:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 DEP         := $(OBJ:.o=.d)
 
