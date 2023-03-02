@@ -7,6 +7,9 @@
 #define ERR_CR_PROJ_FOLDER 0x04
 #define ERR_TEMP_NOT_FOUND 0x08
 
+#define ERR_UNKNOWN_FLAG 0x10
+#define ERR_MULTIPLE_TEMPLATES 0x20
+
 #define ERRMSG_PROJECT_TYPE                                         \
   "Error: Only --lib or --bin flag can be given at the same time\n" \
   "USAGE:\n"                                                        \

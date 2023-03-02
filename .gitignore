@@ -40,6 +40,9 @@
 cpack
 !cpack/
 
+# env files
+*.env
+
 # Debug files
 *.dSYM/
 *.su

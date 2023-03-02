@@ -1,8 +1,8 @@
-// GENERATED #ifndef ${PROJECT_NAME}_INCLUDE_${PROJECT_NAME}_H_
-// GENERATED #define ${PROJECT_NAME}_INCLUDE_${PROJECT_NAME}_H_
+#ifndef LIB_INCLUDE_LIB_H_
+#define LIB_INCLUDE_LIB_H_
 
 #include <stdio.h>
 
 void print_hello();
 
-// GENERATED #endif  // ${PROJECT_NAME}_INCLUDE_${PROJECT_NAME}_H_
+#endif  // LIB_INCLUDE_LIB_H_

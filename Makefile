@@ -53,11 +53,24 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 
 -include $(DEP)
 
-install: $(NAME)
+install: $(NAME) add-alias
 	@mkdir $(INST_DIR)
 	@cp $(NAME) $(INST_DIR)
+	@cp .production.env $(INST_DIR)
+	$(MAKE) add-source-env
 	@cp -R templates $(INST_DIR)
 	$(info INSTALLED CPack)
+
+add-alias:
+	if [[ -z "$$(grep "alias cpack="\$$HOME/.cpack/cpack"" ~/.zshrc)" ]]; then \
+		printf "\n# CPack exec alias\nalias cpack=\$$HOME/.cpack/cpack\n" >> ~/.zshrc; \
+	fi
+
+add-source-env:
+	if [[ -z "$$(grep "source \$$HOME/.cpack/.production.env" ~/.zshrc)" ]]; then \
+		printf "\n# Load CPack env\nsource \$$HOME/.cpack/.production.env\n" >> ~/.zshrc; \
+	fi
+	source $$HOME/.cpack/.production.env
 
 uninstall:
 	$(RM) $(INST_DIR)
